@@ -32,7 +32,7 @@ app.post("/addpassword", (res, req) => {
 
 app.listen(PORT, () => {
     console.log('====================================');
-    console.log();
-    console.log('====================================');
     console.log("Server Running");
+    console.log('====================================');
+    
 })
