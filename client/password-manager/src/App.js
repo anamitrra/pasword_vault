@@ -4,25 +4,32 @@ import axios from "axios";
 
 function App() {
 
-  const [password, setPassword] = useState("");
-  const [description, setDescription] = useState("");
+  const [input, setInput] = useState({
+    password: "",
+    description: "",
+  });
 
-  const addPassword = () => {
-    axios.post(`http://localhost:3001/addpassword`, {
-      description: description,
-      password: password,
+  const handleChange = (event) => {
+    setInput({ ...input, [event.target.name]: event.target.value });
+  }
 
-    });
-  };
-  console.log(description);
+  const handleClick = async (event) => {
+    event.preventDefault();
+    try {
+      await axios.post(`http://localhost:8800/add`, input)
+    } catch (err) {
+      console.log(`Front-end Error: ${err}`);
+    }
+  }
+
 
   return (
     <>
       <div className="App">
         <div className="AddingPassword">
-          <input type="text" placeholder="Enter Password" onChange={(event) => { setPassword(event.target.value); }}></input>
-          <input type="text" placeholder="Enter Description" onChange={(event) => { setDescription(event.target.value); }}></input>
-          <button onClick={addPassword}>Encrypt Password</button>
+          <input type="text" placeholder="Enter Password" name="password" onChange={handleChange}></input>
+          <input type="text" placeholder="Enter Description" name="description" onChange={handleChange}></input>
+          <button onClick={handleClick}>Encrypt Password</button>
         </div>
       </div>
     </>
