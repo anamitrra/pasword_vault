@@ -36,7 +36,7 @@ app.post(`/add`, (req, res) => {
 //server and port check
 app.listen(PORT, () => {
     console.log('====================================');
-    console.log("Server Running");
+    console.log(`Server Running on port ${PORT}`);
     console.log('====================================');
 
 })
